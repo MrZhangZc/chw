@@ -1,33 +1,12 @@
 import Router from 'koa-router'
-import sha1 from 'sha1'
 import config from '../config'
+import reply from '../wechat/reply'
+import wechatMiddle from '../wechat-lib/middleware'
 
 export const router = app =>{
 	const router = new Router()
 
-	router.get('/', (ctx, next) =>{
-		require('../wechat')
-		const token = config.wechat.token
-		const{
-			signature,
-			nonce,
-			timestamp,
-			echostr
-		} = ctx.query
-
-		const str = [token, timestamp, nonce].sort().join('')
-		const sha = sha1(str)
-
-		if( sha === signature ){
-			ctx.body = echostr
-		}else{
-			ctx.body = 'Filed'
-		}
-	})
-
-	/*router.post('/wechat-hear', (ctx, next){
-		
-	})*/
+	router.all('/', wechatMiddle(config.wechat, reply))
 
 	app.use(router.routes())
 	app.use(router.allowedMethods())
