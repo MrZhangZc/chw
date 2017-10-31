@@ -5,26 +5,30 @@ import * as util from './util'
 export default function(opts, reply) {
 	return async function wechatMiddle(ctx, next){
 		const token = opts.token
-		const{
+		const {
 			signature,
 			nonce,
 			timestamp,
 			echostr
 		} = ctx.query
 
+		console.log('aaaaaaaaaaaaaaa',ctx)
+
 		const str = [token, timestamp, nonce].sort().join('')
 		const sha = sha1(str)
+		console.log('zzzzzzzzzzzzzzzzzz',sha)
+		console.log('zzzzzzzzzzzzzzzzzz',signature)
 
 		if(ctx.method === 'GET'){
 			if( sha === signature ){
 				ctx.body = echostr
 			}else{
-				ctx.body = 'Filed'
+				ctx.body = 'zzca'
 			}
 		}else if(ctx.method === 'POST'){
 			if( sha !== signature ){
 				ctx.body = 'Filed'
-
+				
 				return false
 			}
 
@@ -38,7 +42,8 @@ export default function(opts, reply) {
 			const content = await util.parseXML(data)
 			const message = util.formatMessage(content.xml)
 
-			console.log(content)
+			console.log('content:',content)
+			console.log('message:',message)
 
 			ctx.weixin = message
 

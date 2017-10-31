@@ -1,18 +1,10 @@
 <template>
   <section class="container">
-    <img src="../static/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      This page is loaded from the {{ name }}
-    </h1>
-    <h2 class="info" v-if="name === 'client'">
-      Please refresh the page
-    </h2>
-    <nuxt-link class="button" to="/">
-      Home page
-    </nuxt-link>
+    <img src="../assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
   </section>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   asyncData ({ req }) {
     return {
@@ -21,8 +13,40 @@ export default {
   },
   head () {
     return {
-      title: `About Page (${this.name}-side)`
+      title: `zzc啊`
     }
+  },
+  computed: {
+    ...mapState([
+      'baseUrl'
+    ])
+  },
+  beforeMount() {
+    const wx = window.wx
+    const url = window.location.href
+    console.log('我访问的地址是：', url)
+
+    this.$store.dispatch('getWechatSignature', encodeURIComponent(url)).then(res => {
+      if (res.data.success) {
+        const parmas = res.data.parmas
+
+        wx.config({
+          debug: true,
+          appId: parmas.appId,
+          timestamp: parmas.timestamp,
+          nonceStr: parmas.nonceStr,
+          signature: parmas.signature,
+          jsApiList: [
+            'previewImage',
+            'hideAllNonBaseMenuItem',
+            'showMenuItems' ]
+        })
+        wx.ready(() => {
+          wx.hideAllNonBaseMenuItem()
+          console.log('成功调用jssdk')
+        })
+      }
+    })
   }
 }
 </script>

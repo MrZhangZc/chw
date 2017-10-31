@@ -1,8 +1,9 @@
 export default {
 	db: 'mongodb://localhost/chw',
+	SITE_ROOT_URL: 'http://cb4wpm4.hk1.mofasuidao.cn',
 	wechat : {
-		appID: 'wxff5b58214b215c5c',
+		appID: 'wx8b7e922a82db90c8',
 		token: 'csxhwechat',
-		appSecret: '47ce3b2b932466556c57da103a625c90'
+		appSecret: 'e0161299d68744e01b3142b2f86a9060'
 	}
 }
