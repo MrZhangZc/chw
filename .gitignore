@@ -15,3 +15,6 @@ dist
 
 #Build
 build
+
+#config
+server/config
