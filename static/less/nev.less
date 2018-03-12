@@ -1,0 +1,40 @@
+@import './font.less';
+@import './varbale.less';
+.container{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid @boderColor;
+    background-color: #fff;
+
+    &>.nuxt-link-exact-active{
+        color:@activecolor;
+    }
+
+    &>.zzc{
+        width: 33%;
+        font-size: 1.2em;
+        line-height: 3em;
+        text-align: center;
+        font-family: "zzc";
+        display: inline-block;
+        box-sizing: border-box;
+    }
+
+    &>.find:after{
+        content:"推荐";
+    }
+
+    &>.order{
+        border-left: 1px solid @boderColor;
+        border-right: 1px solid @boderColor;
+    }
+
+    &>.order:after{
+        content:"购物车";
+    }
+    
+    &>.me:after{
+        content:"个人中心";
+    }
+}

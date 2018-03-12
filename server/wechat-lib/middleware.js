@@ -12,18 +12,15 @@ export default function(opts, reply) {
 			echostr
 		} = ctx.query
 
-		console.log('aaaaaaaaaaaaaaa',ctx)
-
 		const str = [token, timestamp, nonce].sort().join('')
 		const sha = sha1(str)
-		console.log('zzzzzzzzzzzzzzzzzz',sha)
-		console.log('zzzzzzzzzzzzzzzzzz',signature)
+		console.log(sha === signature)
 
 		if(ctx.method === 'GET'){
 			if( sha === signature ){
 				ctx.body = echostr
 			}else{
-				ctx.body = 'zzca'
+				ctx.body = 'Filed'
 			}
 		}else if(ctx.method === 'POST'){
 			if( sha !== signature ){

@@ -23,6 +23,7 @@ export default {
   },
   beforeMount() {
     const url = window.location.href
+    console.log('123', url)
 
     this.$store.dispatch('getUserByOAuth', encodeURIComponent(url)).then(res => {
       if (res.data.success) {

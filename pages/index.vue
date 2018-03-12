@@ -1,54 +1,27 @@
-<template>
-  <section class="container">
-    <img src="../assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-  </section>
+<template lang="pug">
+  #main
+    swiper
+    .quickmessage
+      lavel 快讯
+      span {{quickmessage}}
+    shops
 </template>
 <script>
-import { mapState } from 'vuex'
+import Swiper from '../components/swiper'
+import Shops from '../components/shops'
 export default {
-  asyncData ({ req }) {
-    return {
-      name: req ? 'server' : 'client'
-    }
-  },
-  head () {
-    return {
-      title: `zzc啊`
-    }
-  },
-  computed: {
-    ...mapState([
-      'baseUrl'
-    ])
-  },
-  beforeMount() {
-    const url = window.location.href
-
-    this.$store.dispatch('getUserByOAuth', encodeURIComponent(url)).then(res => {
-      if (res.data.success) {
-        const params = res.data.params
-
-        console.log('张智超', res.data)
+    data () {
+      return {
+        quickmessage: '本周商品优惠, 上架商品一律5折'
       }
-    })
-  }
+    },
+    components: {
+        Swiper,
+        Shops
+    }
 }
 </script>
-
-<style scoped>
-.title
-{
-  margin-top: 50px;
-}
-.info
-{
-  font-weight: 300;
-  color: #9aabb1;
-  margin: 0;
-  margin-top: 10px;
-}
-.button
-{
-  margin-top: 50px;
-}
+<style lang="less" scoped>
+@import '~static/less/index.less';
 </style>
+

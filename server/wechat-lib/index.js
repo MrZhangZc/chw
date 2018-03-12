@@ -49,6 +49,7 @@ export default class Wechat {
 		}
 
 		await this.saveAccessToken(data)
+		console.log('111111111111111111111111',data)
 
 		return data
 	}
@@ -61,6 +62,7 @@ export default class Wechat {
 
 		const expirseIn = now + (data.expirse_in - 20) * 1000
 		data.expirse_in = expirseIn
+		console.log("expirseIn过期时间:", data)
 
 		return data
 	}
@@ -98,6 +100,8 @@ export default class Wechat {
 
 		const expirseIn = data.expirse_in
 		const now = (new Date().getTime())
+
+		console.log('444444444444444444444是否过期：', now)
 
 		if(now < expirseIn){
 			return true

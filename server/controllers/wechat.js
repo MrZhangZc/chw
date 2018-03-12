@@ -24,7 +24,7 @@ export async function signature(ctx, next) {
 }
 
 export function redirect(ctx, next){
-	const target = config.SITE_ROOT_URL + '/oauth'
+	const target = config.SITE_ROOT_URL + '/'
 	const scope  = 'snsapi_userinfo'
 	const {a, b} = ctx.query
 	const params = `${a}_${b}`

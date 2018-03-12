@@ -6,14 +6,14 @@ const tip = '再次开发一波'
 export default async (ctx, next) => {
 	const message = ctx.weixin
 
-	let zzc = require('../wechat')
+	let zzc = require('./index')
 	let client = zzc.getWechat()
 
 	const menu = require('./menu').default
-	await client.delMenu()
+	//await client.delMenu()
 	const Meaudata = await client.handle('createMenu', menu)
 
-	console.log(Meaudata);
+	console.log('2222222222222222222222', Meaudata);
 
 	if(message.MsgType === 'event'){
 		if(message.Event === 'subscribe'){
