@@ -17,4 +17,4 @@ dist
 build
 
 #config
-server/config
+server/config/index.js
